@@ -10,6 +10,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import TabsNavigator from './navigation/TabsNavigator';
+import {TMDB_API} from './constants/index';
 
 const App = () => {
   //Theme -- coloring
@@ -30,8 +31,65 @@ const App = () => {
       ? ['#26262600', '#262626']
       : ['#EBEBEB00', '#EBEBEB'],
   };
+  //-- state handling
+
+  const [moviesState, setMoviesState] = React.useState({
+    trending: [],
+    upcoming: [],
+    popular: [],
+    topRated: [],
+  });
+
+  //TMDB API
+  const fetchMovies = async (setMoviesState, category) => {
+    let url;
+    switch (category) {
+      case 'trending':
+        url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API.API_KEY}`;
+        break;
+      case 'upcoming':
+        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API.API_KEY}&language=en-US&page=1&region=us`;
+        break;
+      case 'popular':
+        url = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API.API_KEY}&language=en-US&page=1`;
+        break;
+      case 'topRated':
+        url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API.API_KEY}&language=en-US&page=1`;
+        break;
+      default:
+        url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API.API_KEY}`;
+    }
+
+    await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setMoviesState((state) => {
+          let movies = data.results;
+          switch (category) {
+            case 'trending':
+              return {...state, trending: movies};
+            case 'upcoming':
+              return {...state, upcoming: movies};
+            case 'popular':
+              return {...state, popular: movies};
+            case 'topRated':
+              return {...state, topRated: movies};
+            default:
+              return {...state};
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   React.useEffect(() => {
     SplashScreen.hide();
+    fetchMovies(setMoviesState, 'trending');
+    fetchMovies(setMoviesState, 'upcoming');
+    fetchMovies(setMoviesState, 'popular');
+    fetchMovies(setMoviesState, 'topRated');
   }, []);
 
   return (
@@ -44,6 +102,7 @@ const App = () => {
         bkgStyle={bkgStyle}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
+        moviesState={moviesState}
       />
     </NavigationContainer>
   );

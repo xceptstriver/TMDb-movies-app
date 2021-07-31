@@ -10,7 +10,7 @@ import FavouritesStackNavigator from './FavouritesStackNavigator';
 
 const Tab = createBottomTabNavigator();
 const TabsNavigator = (props) => {
-  const {bkgStyle, isDarkMode, setIsDarkMode} = props;
+  const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
   return (
     <Tab.Navigator
@@ -39,6 +39,7 @@ const TabsNavigator = (props) => {
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             setIsDarkMode={setIsDarkMode}
+            moviesState={moviesState}
           />
         )}
       />

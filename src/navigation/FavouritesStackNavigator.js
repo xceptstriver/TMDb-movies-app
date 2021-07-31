@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import FavouritesScreen from '../screens/HomeScreen';
+import FavouritesScreen from '../screens/FavouritesScreen';
 
 const Stack = createStackNavigator();
 const FavouritesStackNavigator = (props) => {
