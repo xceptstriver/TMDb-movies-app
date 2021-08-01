@@ -22,7 +22,6 @@ import TopRatedSection from '../components/TopRatedSection';
 
 const HomeScreen = (props) => {
   const {bkgStyle, isDarkMode, setIsDarkMode, navigation, moviesState} = props;
-  console.log('moviesState', moviesState.trending);
 
   const DropDownMenu = () => {
     return (
