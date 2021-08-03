@@ -187,7 +187,7 @@ const CastScreen = (props) => {
             navigation={navigation}
           />
           {/* Show All Movies */}
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={{alignSelf: 'center'}}
             activeOpacity={0.7}
             onPress={() => {
@@ -205,7 +205,7 @@ const CastScreen = (props) => {
               }}>
               Show All Movies
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </ScrollView>
       ) : (
         <Text

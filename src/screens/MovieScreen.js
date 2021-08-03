@@ -84,13 +84,13 @@ const MovieScreen = (props) => {
   };
 
   const getReleaseDate = (releasedate) => {
-    return (
-      releasedate.slice(8) +
-      '/' +
-      releasedate.slice(5, 7) +
-      '/' +
-      releasedate.slice(0, 4)
-    );
+    return releasedate
+      ? releasedate.slice(8)
+      : '    -' + '/' + releasedate
+      ? releasedate.slice(5, 7)
+      : '    -' + '/' + releasedate
+      ? releasedate.slice(0, 4)
+      : '    -';
   };
 
   const getRuntime = (runtime) => {
@@ -173,7 +173,11 @@ const MovieScreen = (props) => {
               {movieState.title}
               <Text style={{fontFamily: 'Roboto-Light', fontSize: 16}}>
                 {' '}
-                ({movieState.release_date.slice(0, 4)})
+                (
+                {movieState.release_date
+                  ? movieState.release_date.slice(0, 4)
+                  : '      -'}
+                )
               </Text>
             </Text>
           </View>

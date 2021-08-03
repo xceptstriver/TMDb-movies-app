@@ -25,7 +25,7 @@ const SimilarMoviesSection = (props) => {
 
   React.useEffect(() => {
     fetchMovies();
-  });
+  }, []);
   return similarMovies !== null && similarMovies.length != 0 ? (
     <View style={styles.wrapper}>
       <View style={styles.titleWrapper}>
