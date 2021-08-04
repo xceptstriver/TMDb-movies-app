@@ -6,7 +6,14 @@ import SearchScreen from '../screens/SearchScreen';
 
 const Stack = createStackNavigator();
 const SearchStackNavigator = (props) => {
-  const {bkgStyle, isDarkMode, setIsDarkMode} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    handleAddWatchList,
+    handleRemoveWatchList,
+    watchListState,
+  } = props;
 
   return (
     <Stack.Navigator initialRouteName="Search">

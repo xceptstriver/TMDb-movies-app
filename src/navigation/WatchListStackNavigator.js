@@ -1,29 +1,139 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import WatchListScreen from '../screens/WatchListScreen';
+import MovieHeaderIcons from '../components/MovieHeaderIcons';
+import MovieScreen from '../screens/MovieScreen';
+import CastScreen from '../screens/CastScreen';
+import CastMoviesScreen from '../screens/CastMoviesScreen';
 
 const Stack = createStackNavigator();
 const WatchListStackNavigator = (props) => {
-  const {bkgStyle, isDarkMode, setIsDarkMode} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    handleAddWatchList,
+    handleRemoveWatchList,
+    watchListState,
+  } = props;
 
   return (
     <Stack.Navigator initialRouteName="WatchList">
       <Stack.Screen
         name="WatchList"
         options={{
-          headerShown: false,
+          title: 'My Watchlist',
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerTitleStyle: {
+            fontFamily: 'Montserrat-SemiBold',
+            fontSize: 18,
+            color: bkgStyle.secTxtColor,
+            marginLeft: 10,
+          },
         }}
-        children={({navigation}) => (
+        children={({navigation, route}) => (
           <WatchListScreen
             bkgStyle={bkgStyle}
+            navigation={navigation}
+            route={route}
+            watchListState={watchListState}
+          />
+        )}
+      />
+      <Stack.Screen
+        name="Movie"
+        options={({route}) => ({
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerRightContainerStyle: {
+            marginRight: 20,
+          },
+          headerRight: () => (
+            <MovieHeaderIcons
+              movieId={route.params.movieId}
+              movieTitle={route.params.title}
+              handleAddWatchList={handleAddWatchList}
+              handleRemoveWatchList={handleRemoveWatchList}
+              watchListState={watchListState}
+            />
+          ),
+        })}
+        children={({navigation, route}) => (
+          <MovieScreen
+            bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
-            setIsDarkMode={setIsDarkMode}
+            navigation={navigation}
+            movieId={route.params.movieId}
+          />
+        )}
+      />
+
+      <Stack.Screen
+        name="Cast"
+        options={{
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerRightContainerStyle: {
+            marginRight: 20,
+          },
+        }}
+        children={({navigation, route}) => (
+          <CastScreen
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
+            castId={route.params.castId}
+            profilePic={route.params.profilePic}
+          />
+        )}
+      />
+
+      <Stack.Screen
+        name="CastMovies"
+        options={{
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerTitleStyle: {
+            fontFamily: 'Montserrat-SemiBold',
+            fontSize: 18,
+            color: bkgStyle.secTxtColor,
+          },
+        }}
+        children={({navigation, route}) => (
+          <CastMoviesScreen
+            castId={route.params.castId}
+            castName={route.params.castName}
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
           />
         )}
       />
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({});
 
 export default WatchListStackNavigator;

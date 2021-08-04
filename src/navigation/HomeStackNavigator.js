@@ -11,7 +11,15 @@ import CastMoviesScreen from '../screens/CastMoviesScreen';
 
 const Stack = createStackNavigator();
 const HomeStackNavigator = (props) => {
-  const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    moviesState,
+    handleAddWatchList,
+    handleRemoveWatchList,
+    watchListState,
+  } = props;
 
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -93,6 +101,9 @@ const HomeStackNavigator = (props) => {
             <MovieHeaderIcons
               movieId={route.params.movieId}
               movieTitle={route.params.movieTitle}
+              handleAddWatchList={handleAddWatchList}
+              handleRemoveWatchList={handleRemoveWatchList}
+              watchListState={watchListState}
             />
           ),
         })}

@@ -11,6 +11,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import TabsNavigator from './navigation/TabsNavigator';
 import {TMDB_API} from './constants/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   //Theme -- coloring
@@ -39,6 +40,50 @@ const App = () => {
     popular: [],
     topRated: [],
   });
+  const [watchListState, setWatchListState] = React.useState([]);
+
+  const handleAddWatchList = (movieId) => {
+    setWatchListState((state) => {
+      return [...state, movieId];
+    });
+  };
+
+  const handleRemoveWatchList = (movieId) => {
+    setWatchListState((state) => state.filter((item) => item !== movieId));
+  };
+
+  //storing watchList and favourites data locally
+  const saveWatchListAndFavouriteStateData = async () => {
+    try {
+      const jsonValue = JSON.stringify({
+        watchListState: await watchListState,
+      });
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+    } catch (error) {
+      console.log('storing data does not work');
+    }
+  };
+  //reading watchlist and favourites data
+  const readWatchListAndFavouriteStateData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storage_Key');
+      const tasksObj =
+        jsonValue != null
+          ? JSON.parse(jsonValue)
+          : console.log('watchList and favourites are empty');
+      setWatchListState(tasksObj.watchListState);
+    } catch (error) {
+      console.log('loading stored data does not work');
+    }
+  };
+
+  React.useEffect(() => {
+    saveWatchListAndFavouriteStateData();
+  }, [watchListState]);
+
+  React.useEffect(() => {
+    readWatchListAndFavouriteStateData();
+  }, []);
 
   //TMDB API
   const fetchMovies = async (setMoviesState, category) => {
@@ -103,6 +148,9 @@ const App = () => {
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
         moviesState={moviesState}
+        handleAddWatchList={handleAddWatchList}
+        handleRemoveWatchList={handleRemoveWatchList}
+        watchListState={watchListState}
       />
     </NavigationContainer>
   );

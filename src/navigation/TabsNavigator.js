@@ -10,7 +10,15 @@ import FavouritesStackNavigator from './FavouritesStackNavigator';
 
 const Tab = createBottomTabNavigator();
 const TabsNavigator = (props) => {
-  const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    moviesState,
+    handleAddWatchList,
+    handleRemoveWatchList,
+    watchListState,
+  } = props;
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
   return (
     <Tab.Navigator
@@ -40,6 +48,9 @@ const TabsNavigator = (props) => {
             isDarkMode={isDarkMode}
             setIsDarkMode={setIsDarkMode}
             moviesState={moviesState}
+            handleAddWatchList={handleAddWatchList}
+            handleRemoveWatchList={handleRemoveWatchList}
+            watchListState={watchListState}
           />
         )}
       />
@@ -52,7 +63,13 @@ const TabsNavigator = (props) => {
           },
         }}
         children={() => (
-          <SearchStackNavigator bkgStyle={bkgStyle} isDarkMode={isDarkMode} />
+          <SearchStackNavigator
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            handleAddWatchList={handleAddWatchList}
+            handleRemoveWatchList={handleRemoveWatchList}
+            watchListState={watchListState}
+          />
         )}
       />
       <Tab.Screen
@@ -67,6 +84,9 @@ const TabsNavigator = (props) => {
           <WatchListStackNavigator
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
+            handleAddWatchList={handleAddWatchList}
+            handleRemoveWatchList={handleRemoveWatchList}
+            watchListState={watchListState}
           />
         )}
       />
@@ -82,6 +102,9 @@ const TabsNavigator = (props) => {
           <FavouritesStackNavigator
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
+            handleAddWatchList={handleAddWatchList}
+            handleRemoveWatchList={handleRemoveWatchList}
+            watchListState={watchListState}
           />
         )}
       />
