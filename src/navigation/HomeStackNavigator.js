@@ -17,8 +17,11 @@ const HomeStackNavigator = (props) => {
     setIsDarkMode,
     moviesState,
     handleAddWatchList,
+    handleAddFavourites,
     handleRemoveWatchList,
+    handleRemoveFavourites,
     watchListState,
+    favouritesState,
   } = props;
 
   return (
@@ -102,8 +105,11 @@ const HomeStackNavigator = (props) => {
               movieId={route.params.movieId}
               movieTitle={route.params.movieTitle}
               handleAddWatchList={handleAddWatchList}
+              handleAddFavourites={handleAddFavourites}
               handleRemoveWatchList={handleRemoveWatchList}
+              handleRemoveFavourites={handleRemoveFavourites}
               watchListState={watchListState}
+              favouritesState={favouritesState}
             />
           ),
         })}

@@ -41,9 +41,16 @@ const App = () => {
     topRated: [],
   });
   const [watchListState, setWatchListState] = React.useState([]);
+  const [favouritesState, setFavouritesState] = React.useState([]);
 
   const handleAddWatchList = (movieId) => {
     setWatchListState((state) => {
+      return [...state, movieId];
+    });
+  };
+
+  const handleAddFavourites = (movieId) => {
+    setFavouritesState((state) => {
       return [...state, movieId];
     });
   };
@@ -52,15 +59,20 @@ const App = () => {
     setWatchListState((state) => state.filter((item) => item !== movieId));
   };
 
+  const handleRemoveFavourites = (movieId) => {
+    setFavouritesState((state) => state.filter((item) => item !== movieId));
+  };
   //storing watchList and favourites data locally
   const saveWatchListAndFavouriteStateData = async () => {
     try {
       const jsonValue = JSON.stringify({
         watchListState: await watchListState,
+        favouritesState: await favouritesState,
       });
       await AsyncStorage.setItem('@storage_Key', jsonValue);
-    } catch (error) {
-      console.log('storing data does not work');
+    } catch (e) {
+      // saving error
+      console.log('storing data doesnt work', e);
     }
   };
   //reading watchlist and favourites data
@@ -70,16 +82,19 @@ const App = () => {
       const tasksObj =
         jsonValue != null
           ? JSON.parse(jsonValue)
-          : console.log('watchList and favourites are empty');
+          : console.log('watchlist and favourites are empty');
       setWatchListState(tasksObj.watchListState);
-    } catch (error) {
-      console.log('loading stored data does not work');
+      setFavouritesState(tasksObj.favouritesState);
+      // console.log('loaded stored data successfully');
+    } catch (e) {
+      // error reading value
+      console.log('loading stored data doesnt work');
     }
   };
 
   React.useEffect(() => {
     saveWatchListAndFavouriteStateData();
-  }, [watchListState]);
+  }, [watchListState, favouritesState]);
 
   React.useEffect(() => {
     readWatchListAndFavouriteStateData();
@@ -149,8 +164,11 @@ const App = () => {
         setIsDarkMode={setIsDarkMode}
         moviesState={moviesState}
         handleAddWatchList={handleAddWatchList}
+        handleAddFavourites={handleAddFavourites}
         handleRemoveWatchList={handleRemoveWatchList}
+        handleRemoveFavourites={handleRemoveFavourites}
         watchListState={watchListState}
+        favouritesState={favouritesState}
       />
     </NavigationContainer>
   );

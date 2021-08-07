@@ -37,9 +37,10 @@ const WatchListScreen = (props) => {
       watchListMovies.length != watchListState.length
     ) {
       setWatchListMovies([]);
-      watchListState.forEach((item) => {
-        fetchMovies(item);
-      });
+      watchListState &&
+        watchListState.forEach((item) => {
+          fetchMovies(item);
+        });
       console.log('setWatchListMovies', watchListMovies);
     }
   }, [watchListState]);

@@ -7,34 +7,64 @@ const MovieHeaderIcons = (props) => {
     movieId,
     movieTitle,
     handleAddWatchList,
+    handleAddFavourites,
     handleRemoveWatchList,
+    handleRemoveFavourites,
     watchListState,
+    favouritesState,
   } = props;
 
   const [isWatchListed, setIsWatchListed] = React.useState(false);
+  const [isFavourited, setIsFavourited] = React.useState(false);
 
   const handleWatchListMovie = () => {
     let findFlag = false;
 
-    watchListState.forEach((item) => {
-      if (item == movieId) {
-        handleRemoveWatchList(movieId);
-        findFlag = true;
-        return;
-      }
-    });
+    watchListState &&
+      watchListState.forEach((item) => {
+        if (item == movieId) {
+          handleRemoveWatchList(movieId);
+          findFlag = true;
+          return;
+        }
+      });
 
     if (!findFlag) {
       handleAddWatchList(movieId);
     }
   };
 
+  const handleFavouritesMovie = () => {
+    let findFlag = false;
+
+    favouritesState &&
+      favouritesState.forEach((item) => {
+        if (item === movieId) {
+          handleRemoveFavourites(movieId);
+          findFlag = true;
+          return;
+        }
+      });
+
+    if (!findFlag) {
+      handleAddFavourites(movieId);
+    }
+  };
+
   React.useEffect(() => {
-    watchListState.forEach((item) => {
-      if (item === movieId) {
-        setIsWatchListed(true);
-      }
-    });
+    watchListState &&
+      watchListState.forEach((item) => {
+        if (item === movieId) {
+          setIsWatchListed(true);
+        }
+      });
+
+    favouritesState &&
+      favouritesState.forEach((item) => {
+        if (item === movieId) {
+          setIsFavourited(true);
+        }
+      });
   }, []);
 
   return (
@@ -50,10 +80,14 @@ const MovieHeaderIcons = (props) => {
         }}
       />
       <Ionicons
-        name={'heart-outline'}
+        name={isFavourited ? 'heart' : 'heart-outline'}
         style={{...styles.icon}}
-        color={'gray'}
+        color={isFavourited ? '#9470ff' : 'gray'}
         size={28}
+        onPress={() => {
+          setIsFavourited(!isFavourited);
+          handleFavouritesMovie();
+        }}
       />
       <Ionicons
         name={'share-social-outline'}

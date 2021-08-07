@@ -11,8 +11,11 @@ const SearchStackNavigator = (props) => {
     isDarkMode,
     setIsDarkMode,
     handleAddWatchList,
+    handleAddFavourites,
     handleRemoveWatchList,
+    handleRemoveFavourites,
     watchListState,
+    favouritesState,
   } = props;
 
   return (

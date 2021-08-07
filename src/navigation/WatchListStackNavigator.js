@@ -14,8 +14,11 @@ const WatchListStackNavigator = (props) => {
     isDarkMode,
     setIsDarkMode,
     handleAddWatchList,
+    handleAddFavourites,
     handleRemoveWatchList,
+    handleRemoveFavourites,
     watchListState,
+    favouritesState,
   } = props;
 
   return (
@@ -64,8 +67,11 @@ const WatchListStackNavigator = (props) => {
               movieId={route.params.movieId}
               movieTitle={route.params.title}
               handleAddWatchList={handleAddWatchList}
+              handleAddFavourites={handleAddFavourites}
               handleRemoveWatchList={handleRemoveWatchList}
+              handleRemoveFavourites={handleRemoveFavourites}
               watchListState={watchListState}
+              favouritesState={favouritesState}
             />
           ),
         })}

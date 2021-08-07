@@ -16,8 +16,11 @@ const TabsNavigator = (props) => {
     setIsDarkMode,
     moviesState,
     handleAddWatchList,
+    handleAddFavourites,
     handleRemoveWatchList,
+    handleRemoveFavourites,
     watchListState,
+    favouritesState,
   } = props;
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
   return (
@@ -49,8 +52,11 @@ const TabsNavigator = (props) => {
             setIsDarkMode={setIsDarkMode}
             moviesState={moviesState}
             handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
             handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
             watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />
@@ -67,8 +73,11 @@ const TabsNavigator = (props) => {
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
             handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
             watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />
@@ -85,8 +94,11 @@ const TabsNavigator = (props) => {
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
             handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
             watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />
@@ -103,8 +115,11 @@ const TabsNavigator = (props) => {
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
             handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
             watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />
