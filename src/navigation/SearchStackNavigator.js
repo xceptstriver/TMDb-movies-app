@@ -26,25 +26,15 @@ const SearchStackNavigator = (props) => {
     <Stack.Navigator initialRouteName="Search">
       <Stack.Screen
         name="Search"
+        name="Search"
         options={{
-          title: 'Discover',
-          headerTintColor: bkgStyle.secTxtColor,
-          headerStyle: {
-            backgroundColor: bkgStyle.bkgColor,
-            borderBottomWidth: 1,
-            borderBottomColor: 'gray',
-          },
-          headerTitleStyle: {
-            fontFamily: 'Montserrat-SemiBold',
-            fontSize: 18,
-            color: bkgStyle.secTxtColor,
-          },
+          headerShown: false,
         }}
-        children={({navigation}) => (
+        children={({navigation, route}) => (
           <SearchScreen
             bkgStyle={bkgStyle}
-            isDarkMode={isDarkMode}
-            setIsDarkMode={setIsDarkMode}
+            navigation={navigation}
+            route={route}
           />
         )}
       />
