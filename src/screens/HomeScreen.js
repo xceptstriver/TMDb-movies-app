@@ -21,7 +21,14 @@ import PopularSection from '../components/PopularSection';
 import TopRatedSection from '../components/TopRatedSection';
 
 const HomeScreen = (props) => {
-  const {bkgStyle, isDarkMode, setIsDarkMode, navigation, moviesState} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    navigation,
+    moviesState,
+    onSetTheme,
+  } = props;
 
   const DropDownMenu = () => {
     return (
@@ -35,7 +42,10 @@ const HomeScreen = (props) => {
           />
         </MenuTrigger>
         <MenuOptions style={{backgroundColor: bkgStyle.secBkgColor}}>
-          <MenuOption>
+          <MenuOption
+            onSelect={() => {
+              onSetTheme(!isDarkMode);
+            }}>
             <View style={styles.menuPopupLine}>
               <Ionicons
                 name={isDarkMode ? 'sunny-outline' : 'moon-outline'}
@@ -72,7 +82,7 @@ const HomeScreen = (props) => {
         style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
         <View style={styles.header}>
           <Text style={{...styles.title, color: bkgStyle.titleColor}}>
-            My Movies
+            MyFlix
           </Text>
           <DropDownMenu />
         </View>

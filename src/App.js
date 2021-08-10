@@ -144,12 +144,39 @@ const App = () => {
       });
   };
 
+  // storing theme preference
+  const onSetTheme = async (isDark) => {
+    try {
+      setIsDarkMode(isDark);
+      const val = isDark.toString();
+      await AsyncStorage.setItem('@isDarkMode', val);
+    } catch (e) {
+      console.log('storing theme doesnt work', e);
+    }
+  };
+  // loading stored theme preference
+  const getStoredDarkThemeData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@isDarkMode');
+      if (value !== null) {
+        // value previously stored
+        const isTrueSet = value === 'true';
+        setIsDarkMode(isTrueSet);
+      }
+    } catch (e) {
+      // error reading value
+      console.log('loading stored theme doesnt work', e);
+    }
+  };
   React.useEffect(() => {
     SplashScreen.hide();
     fetchMovies(setMoviesState, 'trending');
     fetchMovies(setMoviesState, 'upcoming');
     fetchMovies(setMoviesState, 'popular');
     fetchMovies(setMoviesState, 'topRated');
+
+    //async storage
+    getStoredDarkThemeData();
   }, []);
 
   return (
@@ -169,6 +196,7 @@ const App = () => {
         handleRemoveFavourites={handleRemoveFavourites}
         watchListState={watchListState}
         favouritesState={favouritesState}
+        onSetTheme={onSetTheme}
       />
     </NavigationContainer>
   );

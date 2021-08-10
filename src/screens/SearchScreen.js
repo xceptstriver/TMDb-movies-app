@@ -69,6 +69,20 @@ const SearchScreen = (props) => {
     }
   }, [pgNum, searchedMovies]);
 
+  React.useEffect(() => {
+    if (route.params != undefined) {
+      if (route.params.genreIds.length !== 0) {
+        setIsDiscover(true);
+        setGenreIds(route.params.genreIds);
+        setSearchFlag(true);
+        setPgNum(1);
+        setSearchedMovies([]);
+        setInputValue(null);
+        setIsFoundResults(true);
+      }
+    }
+  }, [route]);
+
   const renderMovieItem = ({item}) => {
     return (
       <MovieCard

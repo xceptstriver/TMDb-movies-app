@@ -7,6 +7,7 @@ import MovieScreen from '../screens/MovieScreen';
 import CastScreen from '../screens/CastScreen';
 import CastMoviesScreen from '../screens/CastMoviesScreen';
 import DiscoverScreen from '../screens/DiscoverScreen';
+import MovieHeaderIcons from '../components/MovieHeaderIcons';
 
 const Stack = createStackNavigator();
 const SearchStackNavigator = (props) => {

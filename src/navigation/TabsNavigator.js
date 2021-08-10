@@ -21,8 +21,19 @@ const TabsNavigator = (props) => {
     handleRemoveFavourites,
     watchListState,
     favouritesState,
+    onSetTheme,
   } = props;
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
+
+  React.useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', () => {
+      setIsKeyboardShown(true);
+    });
+    Keyboard.addListener('keyboardDidHide', () => {
+      setIsKeyboardShown(false);
+    });
+  }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="HomeStack"
@@ -57,6 +68,7 @@ const TabsNavigator = (props) => {
             handleRemoveFavourites={handleRemoveFavourites}
             watchListState={watchListState}
             favouritesState={favouritesState}
+            onSetTheme={onSetTheme}
           />
         )}
       />
