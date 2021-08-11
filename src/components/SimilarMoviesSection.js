@@ -47,7 +47,7 @@ const SimilarMoviesSection = (props) => {
           similarMovies.map((item) => (
             <MovieCard
               key={item.id}
-              movieId={item.movieId}
+              movieId={item.id}
               title={item.title}
               rating={item.vote_average}
               poster={item.poster_path}

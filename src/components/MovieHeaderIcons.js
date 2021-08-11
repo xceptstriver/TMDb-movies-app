@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const MovieHeaderIcons = (props) => {
   const {
@@ -67,6 +68,14 @@ const MovieHeaderIcons = (props) => {
       });
   }, []);
 
+  const copyToClipboard = () => {
+    let movieLink = `https://www.themoviedb.org/movie/${movieId}`;
+    Clipboard.setString(
+      `Here's a movie for you... \n${movieTitle} \n${movieLink}`,
+    );
+    Alert.alert('', `Copied To Clipboard`, [], {cancelable: true});
+  };
+
   return (
     <View style={styles.iconsWrapper}>
       <Ionicons
@@ -94,6 +103,7 @@ const MovieHeaderIcons = (props) => {
         style={{...styles.icon}}
         color={'gray'}
         size={28}
+        onPress={copyToClipboard}
       />
     </View>
   );

@@ -84,14 +84,14 @@ const MovieScreen = (props) => {
     }
   };
 
-  const getReleaseDate = (releasedate) => {
-    return releasedate
-      ? releasedate.slice(8)
-      : '    -' + '/' + releasedate
-      ? releasedate.slice(5, 7)
-      : '    -' + '/' + releasedate
-      ? releasedate.slice(0, 4)
-      : '    -';
+  const getReleaseDate = (releaseDate) => {
+    return (
+      releaseDate.slice(8) +
+      '/' +
+      releaseDate.slice(5, 7) +
+      '/' +
+      releaseDate.slice(0, 4)
+    );
   };
 
   const getRuntime = (runtime) => {
@@ -376,6 +376,44 @@ const MovieScreen = (props) => {
                   movieState.original_language,
                   movieState.spoken_languages,
                 )}
+              </Text>
+            </View>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Budget
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {movieState.status === 'Released' && movieState.budget !== 0
+                  ? `$${movieState.budget}`
+                  : '      -'}
+              </Text>
+            </View>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Revenue
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {movieState.status === 'Released' && movieState.revenue !== 0
+                  ? `$${movieState.revenue}`
+                  : '      -'}
               </Text>
             </View>
           </View>
