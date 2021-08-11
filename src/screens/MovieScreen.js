@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Linking,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import {TMDB_API} from '../constants/index';
 import LinearGradient from 'react-native-linear-gradient';
@@ -380,14 +381,21 @@ const MovieScreen = (props) => {
           </View>
         </ScrollView>
       ) : (
-        <Text
+        <View
           style={{
-            color: bkgStyle.txtColor,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
           }}>
-          Loading...
-        </Text>
+          <ActivityIndicator
+            size={'large'}
+            color={bkgStyle.titleColor}
+            style={{
+              borderRadius: 8,
+              width: '100%',
+            }}
+          />
+        </View>
       )}
     </View>
   );

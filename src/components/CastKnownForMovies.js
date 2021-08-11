@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import {TMDB_API} from '../constants/index';
 import MovieCard from './MovieCard';
 
@@ -54,13 +60,14 @@ const CastKnownForMovies = (props) => {
               alignItems: 'center',
               width: '100%',
             }}>
-            <Text
+            <ActivityIndicator
+              size={'large'}
+              color={bkgStyle.titleColor}
               style={{
-                color: bkgStyle.txtColor,
-                fontFamily: 'OpenSans-SemiBold',
-              }}>
-              Loading...
-            </Text>
+                borderRadius: 8,
+                width: '100%',
+              }}
+            />
           </View>
         )}
         <View style={styles.paddingRightEnd}></View>

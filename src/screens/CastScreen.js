@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {TMDB_API} from '../constants/index';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -208,14 +209,21 @@ const CastScreen = (props) => {
           </TouchableOpacity>
         </ScrollView>
       ) : (
-        <Text
+        <View
           style={{
-            color: bkgStyle.txtColor,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
           }}>
-          Loading...
-        </Text>
+          <ActivityIndicator
+            size={'large'}
+            color={bkgStyle.titleColor}
+            style={{
+              borderRadius: 8,
+              width: '100%',
+            }}
+          />
+        </View>
       )}
     </View>
   );

@@ -19,6 +19,7 @@ import TrendingSection from '../components/TrendingSection';
 import UpcomingSection from '../components/UpcomingSection';
 import PopularSection from '../components/PopularSection';
 import TopRatedSection from '../components/TopRatedSection';
+import MovieCarousel from '../components/MovieCarousel';
 
 const HomeScreen = (props) => {
   const {
@@ -86,6 +87,12 @@ const HomeScreen = (props) => {
           </Text>
           <DropDownMenu />
         </View>
+        <MovieCarousel
+          bkgStyle={bkgStyle}
+          isDarkMode={isDarkMode}
+          movies={moviesState.trending}
+          navigation={navigation}
+        />
         <TrendingSection
           bkgStyle={bkgStyle}
           movies={moviesState.trending}
